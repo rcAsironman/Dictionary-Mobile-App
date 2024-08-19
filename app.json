@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Dictonary",
-    "slug": "Dictonary",
+    "name": "Dictionary",
+    "slug": "Dictionary",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -18,10 +18,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.karthik55.Dictonary"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "d8dc5356-8874-43e4-9882-415d55f9290d"
+      }
     }
   }
 }
