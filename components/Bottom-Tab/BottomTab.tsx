@@ -1,12 +1,14 @@
 import React from 'react'
 import { View } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Home from '../screens/Home'
 import Settings from '../screens/Settings'
 import Ionicons from '@expo/vector-icons/Ionicons'; // Import Ionicons
 import { useTheme } from '../Theme/ThemeProvider'
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
-const Tab = createBottomTabNavigator()
+const Tab = createMaterialTopTabNavigator()
 
 export default function BottomTab() {
 
@@ -14,10 +16,12 @@ export default function BottomTab() {
 
   return (
     <Tab.Navigator
+    tabBarPosition='bottom'
+   
     screenOptions={({route})=>({
-        
+  
         headerShown: false,
-        tabBarIcon: ({focused, color, size}) => {
+        tabBarIcon: ({focused, color}) => {
             let iconName;
 
             if (route.name === 'Home') {
@@ -27,7 +31,7 @@ export default function BottomTab() {
               }
   
               // Return the icon component
-              return <Ionicons name={iconName} size={30} color={themeStyle.color} />;
+              return <Ionicons name={iconName} size={20} color={themeStyle.color} />;
             },
             tabBarLabelStyle:{
               fontSize: 12,
@@ -36,7 +40,11 @@ export default function BottomTab() {
             tabBarActiveTintColor: themeStyle.color,
             tabBarInactiveTintColor: 'gray',
             tabBarHideOnKeyboard: true,
-            tabBarStyle: {backgroundColor: themeStyle.backgroundColor}
+            tabBarStyle: {backgroundColor: themeStyle.backgroundColor},
+            tabBarIndicatorStyle:{
+              height: 0
+            }
+          
     })
   
   }

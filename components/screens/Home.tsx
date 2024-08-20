@@ -1,5 +1,5 @@
 import React,{useEffect, useState} from 'react'
-import { StatusBar,Keyboard,StyleSheet,Text, View,TextInput, TouchableOpacity, YellowBox, } from 'react-native'
+import { ToastAndroid ,StatusBar,Keyboard,StyleSheet,Text, View,TextInput, TouchableOpacity, YellowBox, } from 'react-native'
 import axios from 'axios';
 import Result from '../Reuseble-components/Result';
 import LottieView from 'lottie-react-native';
@@ -16,7 +16,7 @@ export default function Home() {
     const [word, setWord] = useState("");
     const [result, setResult] = useState([]);
     const {theme,themeStyle} = useTheme()
-
+    const [wordNotFound, setWordNotFound] = useState("")
 
     useEffect(()=>{
         if(word.length == 0)
@@ -29,9 +29,24 @@ export default function Home() {
    
     async function fetchApi(){
         Keyboard.dismiss();
-        const response = await axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
+        console.log("In fetch Api function")
+       await axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
+       .then((response)=>{
+        console.log(response)
         setResult([])
         setResult(response.data)
+       })
+       .catch((error)=>{
+        console.log("in catch block ",error)
+        setWordNotFound("No results found")
+        showToast()
+       })
+       
+       
+     }
+
+     const showToast = () => {
+        ToastAndroid.show(wordNotFound, ToastAndroid.SHORT)
      }
   return (
     
